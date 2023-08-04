@@ -9,6 +9,11 @@ if __name__ == '__main__':
     issues = jira_accessor.get_issues()
     for issue in issues:
         messages = [{
+            'role': 'system', 'content': 'You are a Customer Support entity helping customers of <Company Name>, '
+                                         'You need to use only your knowledge in <Company Name> '
+                                         'to help clients resolve the issue. '
+                                         'If you don\'t know the answer refer to <Company Name> R&D for assistance',
+        }, {
             'role': 'user', 'name': os.environ['JIRA_USER_NAME'], 'content': issue.get_field('description')
         }]
         print('Support question:')
